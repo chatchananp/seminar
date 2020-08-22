@@ -68,7 +68,8 @@ public class TimeCalculation {
 			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mma");
 			System.out.print(BeginTime.format(dtf) + " ");
-			System.out.println(seminarNameArray.get(i));
+			System.out.print(seminarNameArray.get(i) + " ");
+			System.out.println(userMinute + "min");
 			
 		}
 		
