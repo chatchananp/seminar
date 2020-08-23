@@ -11,6 +11,7 @@ public class TimeCalculation {
 	int calMinute = 0;
 	int startHour = 9;
 	int startMinute = 0;
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mma");
 	
 	public String seminarName(String seminarName) {
 		String name = seminarName;
@@ -22,26 +23,15 @@ public class TimeCalculation {
 		return Time;
 	}
 	
-//	public String lunchName() {
-//		String lunch = "Lunch";
-//		return lunch;
-//	}
-//	
-//	public LocalTime lunchTime() {
-//		LocalTime Time = LocalTime.of(12, 0);
-//		return Time;
-//	}
-//	
-//	public String NEName() {
-//		String NE = "Networking Event";
-//		return NE;
-//	}
-//	
-//	public LocalTime NETime(int userMinute) {
-//		LocalTime NETime = LocalTime.of(calHour(userMinute), calMinute(userMinute));
-//		seminarTime(9, 0);
-//		return NETime;
-//	}
+	public int setHour(int hr) {
+		startHour = hr;
+		return startHour;
+	}
+	
+	public int setMinute(int min) {
+		startMinute = min;
+		return startMinute;
+	}
 	
 	public int calHour(int userMinute) {
 		LocalTime Time = LocalTime.of(startHour, startMinute);
@@ -56,22 +46,36 @@ public class TimeCalculation {
 		startMinute = calMinute;
 		return calMinute;
 	}
+
+	public LocalTime BeginTime(int userMinute) {
+		LocalTime BeginTime = seminarTime(startHour, startMinute);
+		return BeginTime;
+	}
 	
-	void showSeminarNameAndTime(String seminarName, int userMinute) {
+	public LocalTime EndTime(int userMinute) {
+		int endHr = calHour(userMinute);
+		int endMin = calMinute(userMinute);
+		LocalTime EndTime = seminarTime(endHr, endMin);
+		return EndTime;
+	}
+	
+	void normalTime (String seminarName, int userMinute) {
 		ArrayList<String> seminarNameArray = new ArrayList<>();
 		seminarNameArray.add(seminarName);
 		
 		for (int i = 0; i < seminarNameArray.size(); i++) {
-			LocalTime BeginTime = seminarTime(startHour, startMinute);
-			calHour(userMinute);
-			calMinute(userMinute);
+			LocalTime beginT = BeginTime(userMinute);
+			LocalTime endT = EndTime(userMinute);
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mma");
-			System.out.print(BeginTime.format(dtf) + " ");
+			System.out.print(beginT.format(dtf) + " ");
+			System.out.print(endT.format(dtf) + " ");
 			System.out.print(seminarNameArray.get(i) + " ");
 			System.out.println(userMinute + "min");
-			
 		}
+	}
+	
+	void showSeminarNameAndTime(String seminarName, int userMinute) {
+		normalTime(seminarName, userMinute);
 		
 	}
 	
