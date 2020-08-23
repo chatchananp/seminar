@@ -60,24 +60,74 @@ public class TimeCalculation {
 	}
 	
 	void normalTime (String seminarName, int userMinute) {
+		LocalTime beginT = BeginTime(userMinute);
+		LocalTime endT = EndTime(userMinute);
+
+		System.out.print(beginT.format(dtf) + " ");
+		System.out.print(endT.format(dtf) + " ");
+		System.out.print(seminarName + " ");
+		System.out.println(userMinute + "min");
+	}
+
+	void showSeminarNameAndTime(String seminarName, int userMinute) {
+
 		ArrayList<String> seminarNameArray = new ArrayList<>();
 		seminarNameArray.add(seminarName);
-		
+
 		for (int i = 0; i < seminarNameArray.size(); i++) {
-			LocalTime beginT = BeginTime(userMinute);
-			LocalTime endT = EndTime(userMinute);
-			
-			System.out.print(beginT.format(dtf) + " ");
-			System.out.print(endT.format(dtf) + " ");
-			System.out.print(seminarNameArray.get(i) + " ");
-			System.out.println(userMinute + "min");
+			if (startHour >= 9 && startHour < 11) {
+				normalTime(seminarNameArray.get(i), userMinute);
+				
+			} else if (startHour >= 11 && startHour <= 12) {
+				if (userMinute % 60 <= 1) {
+					if (userMinute + startMinute <= 60) {
+
+					} else if (userMinute + startMinute > 60) {
+						LocalTime LunchTime = seminarTime(12, 0);
+						seminarNameArray.add(i, "Lunch");
+						System.out.print(LunchTime.format(dtf) + " ");
+						System.out.println(seminarNameArray.get(i) + " ");
+						setHour(13);
+						setMinute(0);
+					}
+
+				} else if (userMinute % 60 > 1) {
+					LocalTime LunchTime = seminarTime(12, 0);
+					seminarNameArray.add(i, "Lunch");
+					System.out.print(LunchTime.format(dtf) + " ");
+					System.out.println(seminarNameArray.get(i) + " ");
+					setHour(13);
+					setMinute(0);
+				}
+				
+			} else if (startHour > 12 && startHour < 16) {
+				normalTime(seminarNameArray.get(i), userMinute);
+				
+			} else if (startHour >= 16 && startHour <= 17) {
+				if (userMinute % 60 <= 1) {
+					if (userMinute + startMinute <= 60) {
+
+					} else if (userMinute + startMinute > 60) {
+						LocalTime NETime = seminarTime(startHour, startMinute);
+						seminarNameArray.add(i, "Networking Event");
+						System.out.print(NETime.format(dtf) + " ");
+						System.out.println(seminarNameArray.get(i) + "\n");
+						setHour(9);
+						setMinute(0);
+					}
+
+				} else if (userMinute % 60 > 1) {
+					LocalTime NETime = seminarTime(startHour, startMinute);
+					seminarNameArray.add(i, "Networking Event");
+					System.out.print(NETime.format(dtf) + " ");
+					System.out.println(seminarNameArray.get(i) + "\n");
+					setHour(9);
+					setMinute(0);
+				}
+			}
+
 		}
+
 	}
-	
-	void showSeminarNameAndTime(String seminarName, int userMinute) {
-		normalTime(seminarName, userMinute);
-		
-	}
-	
-	
+
 }
