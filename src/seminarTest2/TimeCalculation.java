@@ -102,19 +102,26 @@ public class TimeCalculation {
 			} else if (startHour >= 11 && startHour <= 12) {
 				if (userMinute < 60) {
 					if (userMinute + startMinute <= 60) {
-						normalTime(seminarNameArray.get(i), userMinute);
-
+						if (startHour == 11) {
+							normalTime(seminarNameArray.get(i), userMinute);
+						} else if (startHour == 12) {
+							LunchTime(userMinute);
+							seminarNameArray.add(i, "Lunch");
+							System.out.println(seminarNameArray.get(i) + " ");
+						}
+						
 					} else if (userMinute + startMinute > 60) {
 						LunchTime(userMinute);
 						seminarNameArray.add(i, "Lunch");
 						System.out.println(seminarNameArray.get(i) + " ");
 					}
 
+				} else if (userMinute >= 60) {
+					LunchTime(userMinute);
+					seminarNameArray.add(i, "Lunch");
+					System.out.println(seminarNameArray.get(i) + " ");
 				}
-
-				LunchTime(userMinute);
-				seminarNameArray.add(i, "Lunch");
-				System.out.println(seminarNameArray.get(i) + " ");
+				
 				
 			} else if (startHour > 12 && startHour < 16) {
 				normalTime(seminarNameArray.get(i), userMinute);
