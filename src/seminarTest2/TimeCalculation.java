@@ -83,11 +83,11 @@ public class TimeCalculation {
 				
 				normalTime(seminarNameArray.get(i), userMinute);
 				
-			} else if (startHour >= 11 && startHour <= 12) {
-				if (userMinute / 60 <= 1) {
+			} else if (startHour >= 11 && startHour < 12) {
+				if (userMinute < 60) {
 					if (userMinute + startMinute <= 60) {
 						normalTime(seminarNameArray.get(i), userMinute);
-						
+
 					} else if (userMinute + startMinute > 60) {
 						LocalTime LunchTime = seminarTime(12, 0);
 						seminarNameArray.add(i, "Lunch");
@@ -97,16 +97,16 @@ public class TimeCalculation {
 						setMinute(0);
 					}
 
-				} else if (userMinute / 60 > 1) {
-					LocalTime LunchTime = seminarTime(12, 0);
-					seminarNameArray.add(i, "Lunch");
-					System.out.print(LunchTime.format(dtf) + " ");
-					System.out.println(seminarNameArray.get(i) + " ");
-					setHour(13);
-					setMinute(0);
-				}
+				} 
 				
-			} else if (startHour > 12 && startHour < 16) {
+				LocalTime LunchTime = seminarTime(12, 0);
+				seminarNameArray.add(i, "Lunch");
+				System.out.print(LunchTime.format(dtf) + " ");
+				System.out.println(seminarNameArray.get(i) + " ");
+				setHour(13);
+				setMinute(0);
+				
+			} else if (startHour >= 12 && startHour < 16) {
 				normalTime(seminarNameArray.get(i), userMinute);
 				
 			} else if (startHour >= 16 && startHour <= 17) {
