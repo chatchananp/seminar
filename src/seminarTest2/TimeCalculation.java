@@ -62,7 +62,8 @@ public class TimeCalculation {
 	
 	void normalTime (String seminarName, int userMinute) {
 		LocalTime beginT = BeginTime(userMinute);
-		LocalTime endT = EndTime(userMinute);
+		//LocalTime endT = EndTime(userMinute);
+		EndTime(userMinute);
 
 		System.out.print(beginT.format(dtf) + " ");
 		//System.out.print(endT.format(dtf) + " ");
@@ -109,8 +110,8 @@ public class TimeCalculation {
 						System.out.println(seminarNameArray.get(i) + " ");
 					}
 
-				} 
-				
+				}
+
 				LunchTime(userMinute);
 				seminarNameArray.add(i, "Lunch");
 				System.out.println(seminarNameArray.get(i) + " ");
