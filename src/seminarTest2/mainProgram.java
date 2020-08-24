@@ -11,8 +11,6 @@ public class mainProgram extends TimeCalculation {
 	public static void main(String[] args) throws IOException {
 		mainProgram newObj = new mainProgram();
 		ArrayList<String> seminarArray = new ArrayList<>();
-		ArrayList<String> seminarNameArray = new ArrayList<>();
-		ArrayList<Integer> seminarTimeArray = new ArrayList<>();
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(
 				"C:\\Users\\baschatt\\Desktop\\JavaProjectsOnEclipse\\seminarTest2\\src\\seminarTest2\\demo.txt"));) {
@@ -35,11 +33,6 @@ public class mainProgram extends TimeCalculation {
 	        	String n1 = matcher.group(1);
 	        	String n2 = matcher.group(2);
 	        	int minute = Integer.parseInt(n2);
-	        	
-	        	seminarNameArray.add(n1);
-	        	seminarTimeArray.add(minute);
-	        	
-
 	        	
 	        	newObj.showSeminarNameAndTime(n1, minute);
 	        }
