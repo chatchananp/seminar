@@ -69,6 +69,21 @@ public class TimeCalculation {
 		System.out.print(seminarName + " ");
 		System.out.println(userMinute + "min");
 	}
+	
+	void LunchTime(int userMinute) {
+		LocalTime LunchTime = seminarTime(12, 0);
+		System.out.print(LunchTime.format(dtf) + " ");
+		setHour(13);
+		setMinute(0);
+	}
+	
+	void NETime(int userMinute) {
+		LocalTime NETime = seminarTime(startHour, startMinute);
+		System.out.print(NETime.format(dtf) + " ");
+		setHour(9);
+		setMinute(0);
+		n++;
+	}
 
 	void showSeminarNameAndTime(String seminarName, int userMinute) {
 
@@ -83,30 +98,24 @@ public class TimeCalculation {
 				
 				normalTime(seminarNameArray.get(i), userMinute);
 				
-			} else if (startHour >= 11 && startHour < 12) {
+			} else if (startHour >= 11 && startHour <= 12) {
 				if (userMinute < 60) {
 					if (userMinute + startMinute <= 60) {
 						normalTime(seminarNameArray.get(i), userMinute);
 
 					} else if (userMinute + startMinute > 60) {
-						LocalTime LunchTime = seminarTime(12, 0);
+						LunchTime(userMinute);
 						seminarNameArray.add(i, "Lunch");
-						System.out.print(LunchTime.format(dtf) + " ");
 						System.out.println(seminarNameArray.get(i) + " ");
-						setHour(13);
-						setMinute(0);
 					}
 
 				} 
 				
-				LocalTime LunchTime = seminarTime(12, 0);
+				LunchTime(userMinute);
 				seminarNameArray.add(i, "Lunch");
-				System.out.print(LunchTime.format(dtf) + " ");
 				System.out.println(seminarNameArray.get(i) + " ");
-				setHour(13);
-				setMinute(0);
 				
-			} else if (startHour >= 12 && startHour < 16) {
+			} else if (startHour > 12 && startHour < 16) {
 				normalTime(seminarNameArray.get(i), userMinute);
 				
 			} else if (startHour >= 16 && startHour <= 17) {
@@ -115,23 +124,15 @@ public class TimeCalculation {
 						normalTime(seminarNameArray.get(i), userMinute);
 						
 					} else if (userMinute + startMinute > 60) {
-						LocalTime NETime = seminarTime(startHour, startMinute);
+						NETime(userMinute);
 						seminarNameArray.add(i, "Networking Event");
-						System.out.print(NETime.format(dtf) + " ");
 						System.out.println(seminarNameArray.get(i) + "\n");
-						setHour(9);
-						setMinute(0);
-						n++;
 					}
 
 				} else if (userMinute / 60 > 1) {
-					LocalTime NETime = seminarTime(startHour, startMinute);
+					NETime(userMinute);
 					seminarNameArray.add(i, "Networking Event");
-					System.out.print(NETime.format(dtf) + " ");
 					System.out.println(seminarNameArray.get(i) + "\n");
-					setHour(9);
-					setMinute(0);
-					n++;
 					
 				}
 				
