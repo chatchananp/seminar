@@ -107,19 +107,19 @@ public class TimeCalculation {
 						} else if (startHour == 12) {
 							LunchTime(userMinute);
 							seminarNameArray.add(i, "Lunch");
-							System.out.println(seminarNameArray.get(i) + " ");
+							System.out.println(seminarNameArray.get(i));
 						}
 						
 					} else if (userMinute + startMinute > 60) {
 						LunchTime(userMinute);
 						seminarNameArray.add(i, "Lunch");
-						System.out.println(seminarNameArray.get(i) + " ");
+						System.out.println(seminarNameArray.get(i));
 					}
 
 				} else if (userMinute >= 60) {
 					LunchTime(userMinute);
 					seminarNameArray.add(i, "Lunch");
-					System.out.println(seminarNameArray.get(i) + " ");
+					System.out.println(seminarNameArray.get(i));
 				}
 				
 				
@@ -127,9 +127,15 @@ public class TimeCalculation {
 				normalTime(seminarNameArray.get(i), userMinute);
 				
 			} else if (startHour >= 16 && startHour <= 17) {
-				if (userMinute / 60 <= 1) {
+				if (userMinute < 60) {
 					if (userMinute + startMinute <= 60) {
-						normalTime(seminarNameArray.get(i), userMinute);
+						if (startHour == 16) {
+							normalTime(seminarNameArray.get(i), userMinute);
+						} else if (startHour == 17) {
+							NETime(userMinute);
+							seminarNameArray.add(i, "Networking Event");
+							System.out.println(seminarNameArray.get(i) + "\n");
+						}
 						
 					} else if (userMinute + startMinute > 60) {
 						NETime(userMinute);
@@ -137,15 +143,16 @@ public class TimeCalculation {
 						System.out.println(seminarNameArray.get(i) + "\n");
 					}
 
-				} else if (userMinute / 60 > 1) {
+				} else if (userMinute >= 60) {
 					NETime(userMinute);
 					seminarNameArray.add(i, "Networking Event");
 					System.out.println(seminarNameArray.get(i) + "\n");
-					
 				}
-				
 			}
+			
 		}
+		
+		
 	}
 
 }
