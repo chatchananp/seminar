@@ -65,7 +65,7 @@ public class TimeCalculation {
 		LocalTime endT = EndTime(userMinute);
 
 		System.out.print(beginT.format(dtf) + " ");
-		System.out.print(endT.format(dtf) + " ");
+		//System.out.print(endT.format(dtf) + " ");
 		System.out.print(seminarName + " ");
 		System.out.println(userMinute + "min");
 	}
@@ -132,11 +132,11 @@ public class TimeCalculation {
 					setHour(9);
 					setMinute(0);
 					n++;
+					
 				}
+				
 			}
-
 		}
-
 	}
 
 }
